@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <title>Upload</title>
+{% endblock %}
+{% block content %}
+    <form method="POST" class="justify-content-center" action="" enctype=multipart/form-data>
+        <div class="form-group">
+            <label>Upload Image</label>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-default btn-file">
+                        Browse… <input type="file" id="imgInp" name="imageInput">
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div>
+            <img id='img-upload'/>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Upload"> </input>
+    </form>
+{% endblock %}    
