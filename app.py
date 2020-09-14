@@ -1,6 +1,7 @@
 import os
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, send_file
 from werkzeug.utils import secure_filename
+from helper.image import findSubPlots
 
 
 UPLOAD_FOLDER = './uploads'
@@ -19,6 +20,7 @@ def allowed_file(filename):
 
 
 
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -37,8 +39,11 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('Uploaded file')
-            return redirect(url_for('upload_file',
-                                    filename=filename))
+            # return redirect(url_for('upload_file',
+            #                         filename=filename))
+            findSubPlots(os.path.join(app.config['UPLOAD_FOLDER'], filename), os.path.join(app.config['UPLOAD_FOLDER'], "split_" + filename))
+            return send_file(os.path.join(app.config['UPLOAD_FOLDER'], "split_" + filename), \
+                mimetype="image/png")
     return render_template("upload.html")
 
 if __name__ == '__main__':
