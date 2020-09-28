@@ -5,9 +5,16 @@ import matplotlib.pyplot as plt
 import cv2
 
 #https://stackoverflow.com/questions/7227074/horizontal-line-detection-with-opencv
+'''
+Function takes in parameter as the path of the image and saves the 
+subplots in save_path+count.png 
+'''
 def findSubPlots(img_path, save_path):
     import math
     import matplotlib.lines as mlines
+
+    return_data =  {}
+
     img = imread(img_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(gray, 80, 120)
@@ -50,7 +57,7 @@ def findSubPlots(img_path, save_path):
                 break
     
     # make a bounding box on the individual scatter plot
-    def draw(x1, y1, max_x, max_y):
+    def draw(x1, y1, max_x, max_y, cnt):
         if y1-max_y < 0:
             return
         crop_img = img[y1-max_y:y1, x1:x1+max_x]
@@ -59,7 +66,7 @@ def findSubPlots(img_path, save_path):
         cv2.line(img, (x1+max_x, y1), (x1+max_x, y1-max_y), (255, 0, 0), 5)
         cv2.line(img, (x1, y1-max_y), (x1+max_x, y1-max_y), (255, 0, 0), 5)
         # cv2.imshow("", crop_img)
-        
+        cv2.imwrite(save_path[:-4]+ str(cnt) + ".png", crop_img)
         # x, y = [x1, x1], [y1, y1-max_y]
         # plt.plot(x, y, marker = 'o', color="g")
         # x, y = [x1, x1+max_x], [y1, y1]
@@ -69,9 +76,12 @@ def findSubPlots(img_path, save_path):
         # x, y = [x1, x1+max_x], [y1-max_y, y1-max_y]
         # plt.plot(x, y, marker = 'o', color="g")
     
-    for y1 in y:
-        draw(x1, y1, max_x, max_y)
+    return_data['images'] = []
+    for i, y1 in enumerate(y):
+        draw(x1, y1, max_x, max_y, i)
+        return_data['images'].append(save_path[:-4]+ str(i) + ".png")
     cv2.imwrite(save_path, img)
     # plt.savefig("split_" + img_path)
 
+    return return_data
 # findSubPlots("test.png", "test_split.png")

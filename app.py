@@ -41,7 +41,8 @@ def upload_file():
             flash('Uploaded file')
             # return redirect(url_for('upload_file',
             #                         filename=filename))
-            findSubPlots(os.path.join(app.config['UPLOAD_FOLDER'], filename), os.path.join(app.config['UPLOAD_FOLDER'], "split_" + filename))
+            split_images = findSubPlots(os.path.join(app.config['UPLOAD_FOLDER'], filename), os.path.join(app.config['UPLOAD_FOLDER'], "split_" + filename))
+            print(split_images)
             return send_file(os.path.join(app.config['UPLOAD_FOLDER'], "split_" + filename), \
                 mimetype="image/png")
     return render_template("upload.html")
