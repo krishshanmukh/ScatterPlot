@@ -83,6 +83,7 @@ def findSubPlots(img_path, save_path):
         draw(x1, y1, max_x, max_y, i)
         return_data['images'].append(save_path[:-4]+ str(i) + ".png")
     cv2.imwrite(save_path, img)
+    return_data['main_image'] = save_path
     # plt.savefig("split_" + img_path)
 
     return return_data
