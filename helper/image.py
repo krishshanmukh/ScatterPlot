@@ -50,8 +50,9 @@ def findSubPlots(img_path, save_path):
         for line in lines:
             diff_y = abs(line[0][3] - line[0][1])
             # Check if the horizontal line is part of next scatter plot bottom axes
-            if abs(diff_y/max_y) > 0.9 and 1.0 > max(line[0][1], line[0][3])/(y[-1] - max_y) > 0.9:
-                print(y, line[0])
+            # print(line, max_x, max_y, y)
+            if abs(diff_y/max_y) > 0.9 and 1.0 > max(line[0][1], line[0][3])/(y[-1] - max_y) > 0.7:
+                # print(y, line[0])
                 y.append(max(line[0][3], line[0][1]))
                 Flag = True
                 break
@@ -60,7 +61,7 @@ def findSubPlots(img_path, save_path):
     def draw(x1, y1, max_x, max_y, cnt):
         if y1-max_y < 0:
             return
-        crop_img = img[y1-max_y:y1, x1:x1+max_x]
+        crop_img = imread(img_path)[y1-max_y:y1, x1:x1+max_x]
         cv2.line(img, (x1, y1), (x1, y1-max_y), (255, 0, 0), 5)
         cv2.line(img, (x1, y1), (x1+max_x, y1), (255, 0, 0), 5)
         cv2.line(img, (x1+max_x, y1), (x1+max_x, y1-max_y), (255, 0, 0), 5)
@@ -78,9 +79,11 @@ def findSubPlots(img_path, save_path):
     
     return_data['images'] = []
     for i, y1 in enumerate(y):
+        # print(i, y1)
         draw(x1, y1, max_x, max_y, i)
         return_data['images'].append(save_path[:-4]+ str(i) + ".jpg")
     cv2.imwrite(save_path, img)
+    return_data['main_image'] = save_path
     # plt.savefig("split_" + img_path)
 
     return return_data

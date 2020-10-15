@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <title>Result</title>
+{% endblock %}
+{% block content %}
+<h3>Image after identifying sub plots</h3>
+<div class = "row">
+    <div class = "col-sm-6 col-md-3">
+        <a href = "#" class = "thumbnail">
+           <img src = "{{ data['main_image'] }}" alt = "Thumbnail" style="height: 400px; width: 400px; padding-bottom: 30px;">
+        </a>
+    </div>
+</div>
+<h3>The images obtained after splitting the original image are: </h3>
+<div class = "row">
+    {% for pth in data['images'] %}
+    <div class = "col-sm-6 col-md-3">
+        <a href = "#" class = "thumbnail">
+           <img src = "{{ pth }}" alt = "Thumbnail" style="height: 150px; width: 150px; padding-bottom: 30px;">
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}    
+   

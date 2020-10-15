@@ -4,7 +4,9 @@ from werkzeug.utils import secure_filename
 from helper.image import findSubPlots
 
 
-UPLOAD_FOLDER = './uploads'
+# Create two constant. They direct to the app root folder and logo upload folder
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join('static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 
@@ -37,14 +39,15 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            print(file.save(os.path.join(UPLOAD_FOLDER, filename)), os.path.join(UPLOAD_FOLDER, filename))
             flash('Uploaded file')
             # return redirect(url_for('upload_file',
             #                         filename=filename))
             split_images = findSubPlots(os.path.join(app.config['UPLOAD_FOLDER'], filename), os.path.join(app.config['UPLOAD_FOLDER'], "split_" + filename))
             print(split_images)
-            return send_file(os.path.join(app.config['UPLOAD_FOLDER'], "split_" + filename), \
-                mimetype="image/png")
+            # return send_file(os.path.join(app.config['UPLOAD_FOLDER'], "split_" + filename), \
+                # mimetype="image/png")
+            return render_template("thumbnails.html", data = {'images': split_images['images'], 'main_image': split_images['main_image']})
     return render_template("upload.html")
 
 if __name__ == '__main__':
