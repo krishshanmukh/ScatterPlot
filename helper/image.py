@@ -7,7 +7,7 @@ import cv2
 #https://stackoverflow.com/questions/7227074/horizontal-line-detection-with-opencv
 '''
 Function takes in parameter as the path of the image and saves the 
-subplots in save_path+count.png 
+subplots in save_path+count.jpg 
 '''
 def findSubPlots(img_path, save_path):
     import math
@@ -66,7 +66,7 @@ def findSubPlots(img_path, save_path):
         cv2.line(img, (x1+max_x, y1), (x1+max_x, y1-max_y), (255, 0, 0), 5)
         cv2.line(img, (x1, y1-max_y), (x1+max_x, y1-max_y), (255, 0, 0), 5)
         # cv2.imshow("", crop_img)
-        cv2.imwrite(save_path[:-4]+ str(cnt) + ".png", crop_img)
+        cv2.imwrite(save_path[:-4]+ str(cnt) + ".jpg", crop_img)
         # x, y = [x1, x1], [y1, y1-max_y]
         # plt.plot(x, y, marker = 'o', color="g")
         # x, y = [x1, x1+max_x], [y1, y1]
@@ -79,7 +79,7 @@ def findSubPlots(img_path, save_path):
     return_data['images'] = []
     for i, y1 in enumerate(y):
         draw(x1, y1, max_x, max_y, i)
-        return_data['images'].append(save_path[:-4]+ str(i) + ".png")
+        return_data['images'].append(save_path[:-4]+ str(i) + ".jpg")
     cv2.imwrite(save_path, img)
     # plt.savefig("split_" + img_path)
 
