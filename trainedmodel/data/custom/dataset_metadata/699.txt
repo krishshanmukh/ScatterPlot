@@ -1,0 +1,12 @@
+xlabel_ylabel,"('normal_1', 'normal_2')"
+image_dim,"(12, 5)"
+opacity,0.9428280826569624
+marker,+
+colors,"(0.9573713905175196, 0.06966161805327775, 0.7133449237728061)"
+font_size_marker_size,"(11, 9.42477796076938)"
+x_distr_y_distr,"('normal', 'normal')"
+param_x_distr,"mu = 0, sigma = 0.1"
+param_y_distr,"mu = 0, sigma = 0.1"
+no_of_samples,30
+x_scale_y_scale,"((-0.20000000000000004, 0.19999999999999996), (-0.20000000000000004, 0.19999999999999996))"
+data_filename,699.csv

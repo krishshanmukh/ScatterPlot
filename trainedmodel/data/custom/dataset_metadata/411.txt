@@ -1,0 +1,12 @@
+xlabel_ylabel,"('gamma_1', 'gamma_2')"
+image_dim,"(12, 5)"
+opacity,0.8312154757501417
+marker,o
+colors,"(0.7158822528552607, 0.9000988728280439, 0.44016384912591455)"
+font_size_marker_size,"(11, 31.41592653589793)"
+x_distr_y_distr,"('gamma', 'gamma')"
+param_x_distr,"shape = 2, scale = 2"
+param_y_distr,"shape = 2, scale = 2"
+no_of_samples,30
+x_scale_y_scale,"((1.0, 8.0), (1.0, 8.0))"
+data_filename,411.csv

@@ -3,11 +3,12 @@ from skimage.color import rgb2gray
 from skimage.io import imread
 import matplotlib.pyplot as plt
 import cv2
+import os
 
 #https://stackoverflow.com/questions/7227074/horizontal-line-detection-with-opencv
 '''
 Function takes in parameter as the path of the image and saves the 
-subplots in save_path+count.png 
+subplots in save_path+count.jpg 
 '''
 def findSubPlots(img_path, save_path):
     import math
@@ -58,7 +59,7 @@ def findSubPlots(img_path, save_path):
                 break
     
     # make a bounding box on the individual scatter plot
-    def draw(x1, y1, max_x, max_y, cnt):
+    def draw(x1, y1, max_x, max_y, cnt, maxCnt):
         if y1-max_y < 0:
             return
         crop_img = imread(img_path)[y1-max_y:y1, x1:x1+max_x]
@@ -67,7 +68,9 @@ def findSubPlots(img_path, save_path):
         cv2.line(img, (x1+max_x, y1), (x1+max_x, y1-max_y), (255, 0, 0), 5)
         cv2.line(img, (x1, y1-max_y), (x1+max_x, y1-max_y), (255, 0, 0), 5)
         # cv2.imshow("", crop_img)
-        cv2.imwrite(save_path[:-4]+ str(cnt) + ".png", crop_img)
+        if cnt < maxCnt - 1:
+            cv2.imwrite(os.path.dirname(img_path)+'\\test\\'+ str(cnt) + ".jpg", crop_img)
+        cv2.imwrite(save_path[:-4]+ str(cnt) + ".jpg", crop_img)
         # x, y = [x1, x1], [y1, y1-max_y]
         # plt.plot(x, y, marker = 'o', color="g")
         # x, y = [x1, x1+max_x], [y1, y1]
@@ -78,10 +81,11 @@ def findSubPlots(img_path, save_path):
         # plt.plot(x, y, marker = 'o', color="g")
     
     return_data['images'] = []
-    for i, y1 in enumerate(y):
-        # print(i, y1)
-        draw(x1, y1, max_x, max_y, i)
-        return_data['images'].append(save_path[:-4]+ str(i) + ".png")
+    for i in range(len(y)):
+        y1 = y[i]
+        draw(x1, y1, max_x, max_y, i,len(y))
+        if i < len(y) - 1:
+            return_data['images'].append(os.path.dirname(img_path)+'\\test\\'+ str(i) + ".jpg")
     cv2.imwrite(save_path, img)
     return_data['main_image'] = save_path
     # plt.savefig("split_" + img_path)

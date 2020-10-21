@@ -1,0 +1,12 @@
+xlabel_ylabel,"('uniform_1', 'uniform_2')"
+image_dim,"(12, 5)"
+opacity,0.9808135587375602
+marker,x
+colors,"(0.578890609667739, 0.10635176518394052, 0.1637022492957252)"
+font_size_marker_size,"(19, 15.707963267948966)"
+x_distr_y_distr,"('uniform', 'uniform')"
+param_x_distr,"a = 1, b = 1000"
+param_y_distr,"a = 1, b = 1000"
+no_of_samples,30
+x_scale_y_scale,"((0.0, 1000.0), (0.0, 1000.0))"
+data_filename,423.csv
