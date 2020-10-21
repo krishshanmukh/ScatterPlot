@@ -1,0 +1,12 @@
+xlabel_ylabel,"('power_1', 'power_2')"
+image_dim,"(12, 5)"
+opacity,0.6450826593840995
+marker,v
+colors,"(0.9394007020280372, 0.6095590102076083, 0.7016150821267525)"
+font_size_marker_size,"(17, 25.132741228718345)"
+x_distr_y_distr,"('power', 'power')"
+param_x_distr,shape = 5.0
+param_y_distr,shape = 5.0
+no_of_samples,30
+x_scale_y_scale,"((0.5, 1.0), (0.5, 1.0))"
+data_filename,486.csv

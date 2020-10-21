@@ -1,0 +1,12 @@
+xlabel_ylabel,"('poisson_1', 'poisson_2')"
+image_dim,"(12, 5)"
+opacity,0.5170867420861435
+marker,x
+colors,"(0.4746175785840072, 0.9053762704274099, 0.4653590849288902)"
+font_size_marker_size,"(12, 25.132741228718345)"
+x_distr_y_distr,"('poisson', 'poisson')"
+param_x_distr,lambda = 5
+param_y_distr,lambda = 5
+no_of_samples,30
+x_scale_y_scale,"((1.0, 8.0), (1.0, 8.0))"
+data_filename,711.csv

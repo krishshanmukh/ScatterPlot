@@ -1,0 +1,12 @@
+xlabel_ylabel,"('binomial_1', 'binomial_2')"
+image_dim,"(12, 5)"
+opacity,0.8415555109963233
+marker,+
+colors,"(0.2473568109778036, 0.24077617022658027, 0.04342614754466523)"
+font_size_marker_size,"(12, 15.707963267948966)"
+x_distr_y_distr,"('binomial', 'binomial')"
+param_x_distr,"n = 10, p = 0.5"
+param_y_distr,"n = 10, p = 0.5"
+no_of_samples,30
+x_scale_y_scale,"((2.0, 8.0), (2.0, 8.0))"
+data_filename,331.csv

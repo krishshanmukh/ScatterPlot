@@ -1,0 +1,12 @@
+xlabel_ylabel,"('chisquare_1', 'chisquare_2')"
+image_dim,"(12, 5)"
+opacity,0.8542203576751375
+marker,v
+colors,"(0.9900921562151346, 0.11313319500573005, 0.8609589112970673)"
+font_size_marker_size,"(12, 15.707963267948966)"
+x_distr_y_distr,"('chisquare', 'chisquare')"
+param_x_distr,df = 2
+param_y_distr,df = 2
+no_of_samples,30
+x_scale_y_scale,"((0.0, 7.0), (0.0, 7.0))"
+data_filename,358.csv

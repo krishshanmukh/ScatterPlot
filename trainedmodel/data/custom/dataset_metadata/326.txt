@@ -1,0 +1,12 @@
+xlabel_ylabel,"('exponential_1', 'exponential_2')"
+image_dim,"(12, 5)"
+opacity,0.6709419057993157
+marker,o
+colors,"(0.8422599005226814, 0.10110966926375631, 0.947720009281861)"
+font_size_marker_size,"(19, 18.84955592153876)"
+x_distr_y_distr,"('exponential', 'exponential')"
+param_x_distr,lambda = 2
+param_y_distr,lambda = 2
+no_of_samples,30
+x_scale_y_scale,"((0.0, 1.4000000000000001), (0.0, 1.5))"
+data_filename,326.csv
