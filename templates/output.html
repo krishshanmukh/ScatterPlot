@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block head %}
+    {{ super() }}
+    <title>Result</title>
+{% endblock %}
+{% block content %}
+<div class="card">
+    <h5 class="card-header">Output of SUBPLOTS</h5>
+    <div class="card-body">
+        <h5 class="card-title">The below images are generated after running retrained YOLO model on the subplots </h5>
+        <table class="table">
+            <thead>
+                <th scope = "col"> Original subplots </th>
+                <th scope = "col"> Processed subplots </th>
+            </thead>
+            <tbody>
+                {% for pth in data['images'] %}
+                <tr>
+                    <td>
+                        <a href = "#" class = "thumbnail col">
+                        <img src = "{{ pth[0] }}" alt = "Thumbnail" style="height: 200px; width: 200px; padding-bottom: 30px;">
+                        </a>
+                    </td>
+                    <td>
+                        <a href = "#" class = "thumbnail col">
+                            <img src = "{{ pth[1] }}" alt = "Thumbnail" style="height: 200px; width: 200px; padding-bottom: 30px;">
+                        </a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 50px;">
+    <h5 class="card-header">Complete Matrix</h5>
+    <div class="card-body">
+        <h5 class="card-title">The below images are generated after reconstructing the matrix from the points obtained above </h5>
+        <table class="table">
+            <thead>
+                <th class = "col"> Old Matrix </th>
+                <th class = "col"> Reconstructed Matrix </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a href = "#" class = "thumbnail col">
+                            <img src = "{{ data['main_image'][0] }}" alt = "Thumbnail" style="height: 400px; width: 400px; padding-bottom: 30px;">
+                        </a>
+                    </td>
+                    <td>
+                        <a href = "#" class = "thumbnail col">
+                            <img src = "{{ data['main_image'][1] }}" alt = "Thumbnail" style="height: 400px; width: 400px; padding-bottom: 30px;">
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}    
+   

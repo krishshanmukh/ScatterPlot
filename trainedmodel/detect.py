@@ -23,6 +23,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.ticker import NullLocator
 
+PREDICTED_FOLDER = os.path.join('static', 'predicted')
+
 def detectPoints(folderName):
     parser = argparse.ArgumentParser()
     parser.add_argument("--image_folder", type=str, default="./static/uploads/"+folderName+'/test', help="path to dataset")
@@ -39,7 +41,10 @@ def detectPoints(folderName):
     print(opt)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    os.makedirs("output/"+folderName+"/test", exist_ok=True)
+    # os.makedirs("output/"+folderName+"/test", exist_ok=True)
+    fname = os.path.join(PREDICTED_FOLDER, folderName, 'test')
+    os.makedirs(fname, exist_ok=True)
+    print(os.path.join(fname, 'test'))
 
     # Set up model
     model = Darknet(opt.model_def, img_size=opt.img_size).to(device)
@@ -98,7 +103,7 @@ def detectPoints(folderName):
     colors = [cmap(i) for i in np.linspace(0, 1, 20)]
 
     imgPointsDict = {}
-    print(imgs)
+    # print(imgs)
     # print("\nSaving images:")
     # Iterate through images and save plot of detections
     for img_i, (path, detections) in enumerate(zip(imgs, img_detections)):
@@ -128,8 +133,9 @@ def detectPoints(folderName):
                 box_h = y2 - y1
 
                 point_x_cord = (x1 + x2)/2
-                point_y_cord = (y1 + y2)/2
-                imgPointsDict[img_i+1].append((point_x_cord,point_y_cord))
+                point_y_cord = img.shape[1] - (y1 + y2)/2
+                # print(point_x_cord, point_y_cord, conf, cls_conf, cls_pred)
+                imgPointsDict[img_i+1].append((point_x_cord.item(),point_y_cord.item(), box_w, box_h))
 
                 color = bbox_colors[int(np.where(unique_labels == int(cls_pred))[0])]
                 #if not classes[int(cls_pred)] == "labels":
@@ -153,10 +159,11 @@ def detectPoints(folderName):
         plt.gca().xaxis.set_major_locator(NullLocator())
         plt.gca().yaxis.set_major_locator(NullLocator())
         filename = path.split("/")[-1].split(".")[0]
-        plt.savefig(f"output/"+folderName+"/"+filename+".jpg", bbox_inches="tight", pad_inches=0.0)
+        plt.savefig(os.path.join(fname, filename+".jpg"), bbox_inches="tight", pad_inches=0.0)
+        print(os.path.join(fname, filename+".jpg"))
         plt.close()
 
-    return imgPointsDict
+    return imgPointsDict, img.shape
 
 
 if __name__ == "__main__":

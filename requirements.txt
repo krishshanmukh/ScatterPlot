@@ -29,12 +29,9 @@ toml==0.10.1
 typed-ast==1.4.1
 Werkzeug==1.0.1
 wrapt==1.12.1
-numpy
 torch>=1.0
 torchvision
-matplotlib
 tensorflow==1.13.2
 tensorboard
 terminaltables
-pillow
 tqdm
