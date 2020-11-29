@@ -18,10 +18,10 @@
         <div class = "row">
             <input type="hidden" id="folderName" name="folderName" value="{{data['folderName']}}">
             <div class = "col-sm-6 col-md-3">
-                <label for="Column0lowerBound">Column0 lowerBound</label>
-                <input type="number" id=Column0lowerBound" name="Column0">
-                <label for="Column0upperBound">Column0 upperBound</label>
-                <input type="number" id=Column0upperBound" name="Column0">
+                <label for="ColumnLowerBound0">Column0 lowerBound</label>
+                <input type="number" id=ColumnLowerBound0" name="ColumnLowerBound0">
+                <label for="ColumnUpperBound0">Column0 upperBound</label>
+                <input type="number" id=ColumnUpperBound0" name="ColumnUpperBound0">
             </div>
             {% for pth in data['images'] %}
             <div class = "col-sm-6 col-md-3">
@@ -29,10 +29,10 @@
                 <a href = "#" class = "thumbnail">
                 <img src = "{{ pth }}" alt = "Thumbnail" style="height: 150px; width: 150px; padding-bottom: 30px;">
                 </a>
-                <label for="Column{{loop.index}}lowerBound">Column{{loop.index}} lowerBound</label>
-                <input type="number" id="Column{{loop.index}}lowerBound" name="Column{{loop.index}}">
-                <label for="Column{{loop.index}}upperBound">Column{{loop.index}} upperBound</label>
-                <input type="number" id="Column{{loop.index}}upperBound" name="Column{{loop.index}}">
+                <label for="ColumnLowerBound{{loop.index}}">Column{{loop.index}} lowerBound</label>
+                <input type="number" id="ColumnLowerBound{{loop.index}}" name="ColumnLowerBound{{loop.index}}">
+                <label for="ColumnUpperBound{{loop.index}}">Column{{loop.index}} upperBound</label>
+                <input type="number" id="ColumnUpperBound{{loop.index}}" name="ColumnUpperBound{{loop.index}}">
             </div>
 
             {% endfor %}

@@ -64,7 +64,7 @@ def findSubPlots(img_path, save_path):
     def draw(x1, y1, max_x, max_y, cnt, maxCnt):
         if y1-max_y < 0:
             return
-        padding = 3
+        padding = 0
         crop_img = imread(img_path)[y1-max_y+padding:y1-padding, x1+padding:x1+max_x-padding]
         cv2.line(img, (x1, y1), (x1, y1-max_y), (255, 0, 0), 5)
         cv2.line(img, (x1, y1), (x1+max_x, y1), (255, 0, 0), 5)

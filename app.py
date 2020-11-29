@@ -76,7 +76,13 @@ def runDetection():
     if request.method == 'POST':
         print(request.form.keys)
         folderName = request.form['folderName']
-        imgPointsDict, img_shape = detect.detectPoints(folderName)
+        column_values = []
+        for i in range(100):
+            if "ColumnLowerBound" + str(i) in request.form.keys():
+                lower = int(request.form["ColumnLowerBound" + str(i)])
+                upper = int(request.form["ColumnUpperBound" + str(i)])
+                column_values.append((lower, upper))
+        imgPointsDict, img_shape = detect.detectPoints(folderName, column_values)
         # print(imgPointsDict)
         PLTS_PTS = []
         DATA = []
@@ -92,22 +98,24 @@ def runDetection():
             # plt.scatter(x, y)
             # plt.savefig('temp.png')
             PLTS_PTS.append(PTS)
-        # print(PLTS_PTS)
+        # print(len(PLTS_PTS))
 
-        for pt1 in PLTS_PTS[0]:
+        for pt1 in PLTS_PTS[-1]:
             # overall point
             pt = [pt1[0], pt1[1]]
             flag = True
-            for plt2 in PLTS_PTS[1:]:
-                y = findClosestPoints(pt1, plt2)
+            # print(len(PLTS_PTS[1::-1]), len(PLTS_PTS))
+            for pt2 in PLTS_PTS[::-1][1:]:
+                y = findClosestPoints(pt1, pt2)
                 if y != -1:
                     pt.append(y)
                 else:
                     flag = False
             if flag:
                 DATA.append(pt)
-        DATA.append([0 for _ in range(len(DATA[0]))])
-        DATA.append([img_shape[1] for _ in range(len(DATA[0]))])
+                print(pt)
+        # DATA.append([0 for _ in range(len(DATA[0]))])
+        # DATA.append([img_shape[1] for _ in range(len(DATA[0]))])
         import seaborn as sns
         import pandas as pd
         sns.set_theme(style="ticks")
