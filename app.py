@@ -94,11 +94,7 @@ def runDetection():
                 y.append(v[1])
                 PTS.append((v[0], v[1]))
             import matplotlib.pyplot as plt
-            # plt.ylim((370, 0))
-            # plt.scatter(x, y)
-            # plt.savefig('temp.png')
             PLTS_PTS.append(PTS)
-        # print(len(PLTS_PTS))
 
         for pt1 in PLTS_PTS[-1]:
             # overall point
@@ -113,7 +109,7 @@ def runDetection():
                     flag = False
             if flag:
                 DATA.append(pt)
-                print(pt)
+                # print(pt)
         # DATA.append([0 for _ in range(len(DATA[0]))])
         # DATA.append([img_shape[1] for _ in range(len(DATA[0]))])
         import seaborn as sns
@@ -123,7 +119,10 @@ def runDetection():
         sns.pairplot(df)
         import  csv
 
-        with open("temp_data.csv","w") as f:
+        fileDirectory = os.path.join(PREDICTED_FOLDER, folderName, 'data')
+        os.makedirs(fileDirectory, exist_ok=True)
+
+        with open(os.path.join(fileDirectory, "data.csv"),"w") as f:
             wr = csv.writer(f)
             wr.writerows(DATA)
         plt.savefig(os.path.join(PREDICTED_FOLDER, folderName, 'source.png'))
