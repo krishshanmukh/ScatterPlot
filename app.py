@@ -144,7 +144,19 @@ def runDetection():
                 os.path.join(PREDICTED_FOLDER, folderName, 'test', files)))
                 print("FIle inn 131", files)
         print(main_image, images)
-        return render_template("output.html", data = {'main_image':main_image, 'images': images })
+
+        # print(DATA)
+        for i in range(len(DATA)):
+            x = [DATA[i][0]]
+            x.extend(DATA[i][::-1][:-1])
+            x = [round(i, 2) for i in x]
+            DATA[i] = x
+        # print(DATA)
+        matrix_headers = []
+        if len(DATA)>0:
+            for i in range(len(DATA[0])):
+                matrix_headers.append("Column " + str(i+1))
+        return render_template("output.html", data = {'main_image':main_image, 'images': images, 'matrix_data': DATA, 'matrix_headers': matrix_headers})
     return render_template("upload.html")
 
 if __name__ == '__main__':
