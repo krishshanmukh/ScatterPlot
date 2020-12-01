@@ -60,5 +60,28 @@
         </table>
     </div>
 </div>
+
+<div class="card" style="margin-top: 50px;">
+    <h5 class="card-header">Data</h5>
+    <div class="card-body">
+        <h5 class="card-title">Predicted data from the image</h5>
+        <table class="table">
+            <thead>
+                {% for c in data['matrix_headers'] %}
+                <th> {{ c }} </th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for r in data['matrix_data'] %}
+                <tr>
+                    {% for c in r %}
+                    <td>{{ c }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}    
    
