@@ -19,9 +19,9 @@
             <input type="hidden" id="folderName" name="folderName" value="{{data['folderName']}}">
             <div class = "col-sm-6 col-md-3">
                 <label for="ColumnLowerBound0">Column0 lowerBound</label>
-                <input type="number" id=ColumnLowerBound0" name="ColumnLowerBound0">
+                <input type="number" step="0.01" id="ColumnLowerBound0" required name="ColumnLowerBound0">
                 <label for="ColumnUpperBound0">Column0 upperBound</label>
-                <input type="number" id=ColumnUpperBound0" name="ColumnUpperBound0">
+                <input type="number" step="0.01" id="ColumnUpperBound0" required name="ColumnUpperBound0">
             </div>
             {% for pth in data['images'] %}
             <div class = "col-sm-6 col-md-3">
@@ -30,15 +30,15 @@
                 <img src = "{{ pth }}" alt = "Thumbnail" style="height: 150px; width: 150px; padding-bottom: 30px;">
                 </a>
                 <label for="ColumnLowerBound{{loop.index}}">Column{{loop.index}} lowerBound</label>
-                <input type="number" id="ColumnLowerBound{{loop.index}}" name="ColumnLowerBound{{loop.index}}">
+                <input type="number" step="0.01" required id="ColumnLowerBound{{loop.index}}" name="ColumnLowerBound{{loop.index}}">
                 <label for="ColumnUpperBound{{loop.index}}">Column{{loop.index}} upperBound</label>
-                <input type="number" id="ColumnUpperBound{{loop.index}}" name="ColumnUpperBound{{loop.index}}">
+                <input type="number" step="0.01" required id="ColumnUpperBound{{loop.index}}" name="ColumnUpperBound{{loop.index}}">
             </div>
 
             {% endfor %}
             
         </div>
-        <input type="submit" class="btn btn-primary" value="Run PCA"> </input>
+        <input type="submit" class="btn btn-primary" value="Run Prediction Model"> </input>
     </div>
 </form>
     

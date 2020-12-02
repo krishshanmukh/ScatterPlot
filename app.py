@@ -79,8 +79,8 @@ def runDetection():
         column_values = []
         for i in range(100):
             if "ColumnLowerBound" + str(i) in request.form.keys():
-                lower = int(request.form["ColumnLowerBound" + str(i)])
-                upper = int(request.form["ColumnUpperBound" + str(i)])
+                lower = float(request.form["ColumnLowerBound" + str(i)])
+                upper = float(request.form["ColumnUpperBound" + str(i)])
                 column_values.append((lower, upper))
         imgPointsDict, img_shape = detect.detectPoints(folderName, column_values)
         # print(imgPointsDict)
