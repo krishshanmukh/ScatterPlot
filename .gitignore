@@ -3,6 +3,5 @@ __pycache__/
 venv/
 static/uploads
 static/predicted
-*png
 EAST
 trainedmodel/checkpoints/*pth
