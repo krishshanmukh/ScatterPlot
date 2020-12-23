@@ -18,10 +18,20 @@ def findSubPlots(img_path, save_path):
 
     return_data =  {}
 
+    # read image
     img = imread(img_path)
+
+    # Code for Hough Transformation to identify the horizontal and vertical lines
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     edges = cv2.Canny(gray, 80, 120)
-    lines = cv2.HoughLinesP(edges, 1, math.pi/2, 2, None, 30, 1);
+
+    # Get the coordinates of lines
+    lines = cv2.HoughLinesP(edges, 1, math.pi/2, 2, None, 30, 1)
+
+    # Sometimes, a single line is broke down into multiple small lines
+    # To resolve the issue of finding sub plots in that case, do the following
+    # 1. Identify maximum lengths of lines along x and y directions 
+    # (can be seen as length of x/y axes). 
     max_x = max([abs(line[0][2] - line[0][0]) for line in lines])
     max_y = max([abs(line[0][3] - line[0][1]) for line in lines])
     # print(max_x, max_y)
@@ -31,14 +41,19 @@ def findSubPlots(img_path, save_path):
     # print(lines)
     y1 = 0
     x1 = 100000
+
+    # 2. Identify the bottom y point by finding maximum Y of all X axis lines 
+    # (having same length as the max_x)
     for line in lines:
         line = line[0]
         if abs(line[0] - line[2])/max_x > 0.9 and max(line[1], line[3]) > y1:
-        # print(line, "b")
+            # print(line, "b")
             y1 = max(line[1], line[3])
     
     y = [y1]
 
+    # 3. Find the x coordinate for the corresponding Y coordinate by iterating
+    # through all lines along the Y axis.
     for line in lines:
         line = line[0]
         if abs(line[1] - line[3])/max_y > 0.9 and min(line[0], line[2]) < x1:
@@ -91,7 +106,6 @@ def findSubPlots(img_path, save_path):
             return_data['images'].append(os.path.join(os.path.dirname(img_path) ,'test', str(i) + ".jpg"))
     cv2.imwrite(save_path, img)
     return_data['main_image'] = save_path
-    # plt.savefig("split_" + img_path)
 
     return return_data
 # findSubPlots("test.png", "test_split.png")

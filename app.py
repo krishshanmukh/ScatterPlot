@@ -30,6 +30,9 @@ def getFileNameWithoutExtension(file):
     file_name_without_extension = file_name[:index_of_dot]
     return file_name_without_extension
 
+'''
+Function that deals with the uploading of the image
+'''
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -77,6 +80,7 @@ def runDetection():
         print(request.form.keys)
         folderName = request.form['folderName']
         column_values = []
+        # Get the axes limits as part of post request
         for i in range(100):
             if "ColumnLowerBound" + str(i) in request.form.keys():
                 lower = float(request.form["ColumnLowerBound" + str(i)])
@@ -86,6 +90,8 @@ def runDetection():
         # print(imgPointsDict)
         PLTS_PTS = []
         DATA = []
+
+        # RECONSTRUCTION LOGIC: uses only the first column data
         for val in imgPointsDict.values():
             x, y = [], []
             PTS = []
@@ -109,9 +115,7 @@ def runDetection():
                     flag = False
             if flag:
                 DATA.append(pt)
-                # print(pt)
-        # DATA.append([0 for _ in range(len(DATA[0]))])
-        # DATA.append([img_shape[1] for _ in range(len(DATA[0]))])
+
         import seaborn as sns
         import pandas as pd
         sns.set_theme(style="ticks")
